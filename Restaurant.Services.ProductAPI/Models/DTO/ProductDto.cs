@@ -1,17 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Restaurant.Services.ProductAPI.Models
+namespace Restaurant.Services.ProductAPI.Models.DTO
 {
-    public class Product
+    public class ProductDto
     {
-        [Key]
         public int ProductId { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Range(1,1000)]
         public double Price { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        
     }
 }
