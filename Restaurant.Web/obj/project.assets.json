@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\edani\\.nuget\\packages\\": {}
+    "C:\\Users\\Администратор\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Programming\\restaurant-microservices\\Restaurant.Web\\Restaurant.Web.csproj",
+      "projectUniqueName": "D:\\microservices\\restaurant-microservices\\Restaurant.Web\\Restaurant.Web.csproj",
       "projectName": "Restaurant.Web",
-      "projectPath": "D:\\Programming\\restaurant-microservices\\Restaurant.Web\\Restaurant.Web.csproj",
-      "packagesPath": "C:\\Users\\edani\\.nuget\\packages\\",
-      "outputPath": "D:\\Programming\\restaurant-microservices\\Restaurant.Web\\obj\\",
+      "projectPath": "D:\\microservices\\restaurant-microservices\\Restaurant.Web\\Restaurant.Web.csproj",
+      "packagesPath": "C:\\Users\\Администратор\\.nuget\\packages\\",
+      "outputPath": "D:\\microservices\\restaurant-microservices\\Restaurant.Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\edani\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Администратор\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -51,8 +51,7 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -64,7 +63,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
