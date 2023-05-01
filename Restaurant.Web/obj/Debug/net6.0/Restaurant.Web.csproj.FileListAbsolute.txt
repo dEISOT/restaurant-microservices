@@ -55,3 +55,5 @@ D:\microservices\restaurant-microservices\Restaurant.Web\obj\Debug\net6.0\refint
 D:\microservices\restaurant-microservices\Restaurant.Web\obj\Debug\net6.0\Restaurant.Web.pdb
 D:\microservices\restaurant-microservices\Restaurant.Web\obj\Debug\net6.0\Restaurant.Web.genruntimeconfig.cache
 D:\microservices\restaurant-microservices\Restaurant.Web\obj\Debug\net6.0\ref\Restaurant.Web.dll
+D:\Programming\restaurant-microservices\Restaurant.Web\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\Programming\restaurant-microservices\Restaurant.Web\obj\Debug\net6.0\Restaurant.Web.csproj.CopyComplete

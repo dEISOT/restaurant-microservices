@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\microservices\\restaurant-microservices\\Restaurant.Services.ProductAPI\\Restaurant.Services.ProductAPI.csproj": {}
+    "D:\\Programming\\restaurant-microservices\\Restaurant.Services.ProductAPI\\Restaurant.Services.ProductAPI.csproj": {}
   },
   "projects": {
-    "D:\\microservices\\restaurant-microservices\\Restaurant.Services.ProductAPI\\Restaurant.Services.ProductAPI.csproj": {
+    "D:\\Programming\\restaurant-microservices\\Restaurant.Services.ProductAPI\\Restaurant.Services.ProductAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\microservices\\restaurant-microservices\\Restaurant.Services.ProductAPI\\Restaurant.Services.ProductAPI.csproj",
+        "projectUniqueName": "D:\\Programming\\restaurant-microservices\\Restaurant.Services.ProductAPI\\Restaurant.Services.ProductAPI.csproj",
         "projectName": "Restaurant.Services.ProductAPI",
-        "projectPath": "D:\\microservices\\restaurant-microservices\\Restaurant.Services.ProductAPI\\Restaurant.Services.ProductAPI.csproj",
-        "packagesPath": "C:\\Users\\Администратор\\.nuget\\packages\\",
-        "outputPath": "D:\\microservices\\restaurant-microservices\\Restaurant.Services.ProductAPI\\obj\\",
+        "projectPath": "D:\\Programming\\restaurant-microservices\\Restaurant.Services.ProductAPI\\Restaurant.Services.ProductAPI.csproj",
+        "packagesPath": "C:\\Users\\edani\\.nuget\\packages\\",
+        "outputPath": "D:\\Programming\\restaurant-microservices\\Restaurant.Services.ProductAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Администратор\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\edani\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -81,7 +81,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -93,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
