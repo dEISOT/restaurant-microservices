@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using System.Text;
 using System.Text.Json;
 
-namespace UI.Pages.Diagnostics;
+namespace Restaurant.Services.Identity.Pages.Diagnostics;
 
 public class ViewModel
 {

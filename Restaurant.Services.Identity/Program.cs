@@ -1,3 +1,4 @@
+using Duende.IdentityServer.Test;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Restaurant.Services.Identity;
@@ -12,12 +13,14 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+
 
 builder.Services.AddIdentity<ApplicationUser,IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddRazorPages();
-
+//builder.Services.AddSwaggerGen();
 builder.Services.AddIdentityServer(options =>
 {
     options.Events.RaiseErrorEvents = true;
@@ -31,7 +34,6 @@ builder.Services.AddIdentityServer(options =>
 .AddAspNetIdentity<ApplicationUser>()
 .AddDeveloperSigningCredential();
 
-builder.Services.AddScoped<IDbInitializer,DbInitializer>();
 
 
 var app = builder.Build();

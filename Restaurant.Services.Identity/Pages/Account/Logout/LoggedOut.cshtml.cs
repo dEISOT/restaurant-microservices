@@ -2,7 +2,7 @@ using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace UI.Pages.Logout;
+namespace Restaurant.Services.Identity.Pages.Logout;
 
 [SecurityHeaders]
 [AllowAnonymous]

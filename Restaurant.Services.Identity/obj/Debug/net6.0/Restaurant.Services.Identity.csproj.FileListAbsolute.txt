@@ -79,3 +79,4 @@ D:\Programming\restaurant-microservices\Restaurant.Services.Identity\obj\Debug\n
 D:\Programming\restaurant-microservices\Restaurant.Services.Identity\obj\Debug\net6.0\Restaurant.Services.Identity.genruntimeconfig.cache
 D:\Programming\restaurant-microservices\Restaurant.Services.Identity\obj\Debug\net6.0\ref\Restaurant.Services.Identity.dll
 D:\Programming\restaurant-microservices\Restaurant.Services.Identity\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+D:\Programming\restaurant-microservices\Restaurant.Services.Identity\bin\Debug\net6.0\keys\is-signing-key-D75CA1334406A60261E54F7D4198F7D3.json

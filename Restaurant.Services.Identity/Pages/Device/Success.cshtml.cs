@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace UI.Pages.Device;
+namespace Restaurant.Services.Identity.Pages.Device;
 
 [SecurityHeaders]
 [Authorize]

@@ -1,117 +1,100 @@
-using Duende.IdentityServer;
-using Duende.IdentityServer.Events;
-using Duende.IdentityServer.Models;
-using Duende.IdentityServer.Services;
-using Duende.IdentityServer.Stores;
-using Duende.IdentityServer.Test;
-using Microsoft.AspNetCore.Authentication;
+using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Restaurant.Services.Identity.Models;
+using System.Security.Claims;
 
-namespace UI.Pages.Create;
+namespace Restaurant.Services.Identity.Pages.Create;
 
 [SecurityHeaders]
 [AllowAnonymous]
 public class Index : PageModel
 {
-    private readonly TestUserStore _users;
-    private readonly IIdentityServerInteractionService _interaction;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
+
+    public Index(
+        UserManager<ApplicationUser> userManager,
+        SignInManager<ApplicationUser> signInManager,
+        RoleManager<IdentityRole> roleManager
+        )
+    {
+        _userManager = userManager;
+        _signInManager = signInManager;
+        _roleManager = roleManager;
+    }
 
     [BindProperty]
     public InputModel Input { get; set; }
-        
-    public Index(
-        IIdentityServerInteractionService interaction,
-        TestUserStore users = null)
-    {
-        // this is where you would plug in your own custom identity management library (e.g. ASP.NET Identity)
-        _users = users ?? throw new Exception("Please call 'AddTestUsers(TestUsers.Users)' on the IIdentityServerBuilder in Startup or remove the TestUserStore from the AccountController.");
-            
-        _interaction = interaction;
-    }
 
-    public IActionResult OnGet(string returnUrl)
+    public async Task<IActionResult> OnGet(string returnUrl)
     {
-        Input = new InputModel { ReturnUrl = returnUrl };
+        
+
+        Input = new InputModel
+        {
+            ReturnUrl = returnUrl
+        };
+
         return Page();
     }
-        
-    public async Task<IActionResult> OnPost()
+
+    public async Task<IActionResult> OnPost(string returnUrl)
     {
-        // check if we are in the context of an authorization request
-        var context = await _interaction.GetAuthorizationContextAsync(Input.ReturnUrl);
-
-        // the user clicked the "cancel" button
-        if (Input.Button != "create")
-        {
-            if (context != null)
-            {
-                // if the user cancels, send a result back into IdentityServer as if they 
-                // denied the consent (even if this client does not require consent).
-                // this will send back an access denied OIDC error response to the client.
-                await _interaction.DenyAuthorizationAsync(context, AuthorizationError.AccessDenied);
-
-                // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
-                if (context.IsNativeClient())
-                {
-                    // The client is native, so this change in how to
-                    // return the response is for better UX for the end user.
-                    return this.LoadingPage(Input.ReturnUrl);
-                }
-
-                return Redirect(Input.ReturnUrl);
-            }
-            else
-            {
-                // since we don't have a valid context, then we just go back to the home page
-                return Redirect("~/");
-            }
-        }
-
-        if (_users.FindByUsername(Input.Username) != null)
-        {
-            ModelState.AddModelError("Input.Username", "Invalid username");
-        }
-
         if (ModelState.IsValid)
         {
-            var user = _users.CreateUser(Input.Username, Input.Password, Input.Name, Input.Email);
-
-            // issue authentication cookie with subject ID and username
-            var isuser = new IdentityServerUser(user.SubjectId)
+            var user = new ApplicationUser
             {
-                DisplayName = user.Username
+                UserName = Input.Username,
+                Email = Input.Email,
+                EmailConfirmed = true,
+                FirstName = Input.FirstName,
+                LastName = Input.LastName
             };
 
-            await HttpContext.SignInAsync(isuser);
+            var result = await _userManager.CreateAsync(user, Input.Password);
 
-            if (context != null)
+            if (result.Succeeded)
             {
-                if (context.IsNativeClient())
+                if (!_roleManager.RoleExistsAsync(SD.Customer).GetAwaiter().GetResult())
                 {
-                    // The client is native, so this change in how to
-                    // return the response is for better UX for the end user.
-                    return this.LoadingPage(Input.ReturnUrl);
+                    var userRole = new IdentityRole
+                    {
+                        Name = SD.Customer,
+                        NormalizedName = SD.Customer,
+
+                    };
+                    await _roleManager.CreateAsync(userRole);
                 }
 
-                // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
-                return Redirect(Input.ReturnUrl);
-            }
+                await _userManager.AddToRoleAsync(user, SD.Customer);
 
-            // request for a local page
-            if (Url.IsLocalUrl(Input.ReturnUrl))
-            {
-                return Redirect(Input.ReturnUrl);
-            }
-            else if (string.IsNullOrEmpty(Input.ReturnUrl))
-            {
-                return Redirect("~/");
-            }
-            else
-            {
-                // user might have clicked on a malicious link - should be logged
-                throw new Exception("invalid return URL");
+                await _userManager.AddClaimsAsync(user, new Claim[]{
+                        new Claim(JwtClaimTypes.Name, Input.Username),
+                        new Claim(JwtClaimTypes.Email, Input.Email),
+                        new Claim(JwtClaimTypes.Role, SD.Customer) });
+
+                var loginresult = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, false, lockoutOnFailure: true);
+                if (loginresult.Succeeded)
+                {
+
+                    if (Url.IsLocalUrl(Input.ReturnUrl))
+                    {
+                        return Redirect(Input.ReturnUrl);
+                    }
+                    else if (string.IsNullOrEmpty(Input.ReturnUrl))
+                    {
+                        return Redirect("~/");
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid return url");
+                    }
+                }
+
             }
         }
 

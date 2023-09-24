@@ -1,5 +1,5 @@
 
-namespace UI.Pages.Logout;
+namespace Restaurant.Services.Identity.Pages.Logout;
 
 public class LogoutOptions
 {

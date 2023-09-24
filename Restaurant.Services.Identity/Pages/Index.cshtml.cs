@@ -2,7 +2,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace UI.Pages.Home;
+namespace Restaurant.Services.Identity.Pages.Home;
 
 [AllowAnonymous]
 public class Index : PageModel

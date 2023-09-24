@@ -1,4 +1,4 @@
-namespace UI.Pages.Login;
+namespace Restaurant.Services.Identity.Pages.Login;
 
 public class LoginOptions
 {

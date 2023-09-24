@@ -3,7 +3,7 @@
 
 using Duende.IdentityServer.Models;
 
-namespace UI.Pages.Error;
+namespace Restaurant.Services.Identity.Pages.Error;
 
 public class ViewModel
 {

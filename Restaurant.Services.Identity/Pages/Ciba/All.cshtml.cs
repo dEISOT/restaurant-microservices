@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace UI.Pages.Ciba;
+namespace Restaurant.Services.Identity.Pages.Ciba;
 
 [SecurityHeaders]
 [Authorize]

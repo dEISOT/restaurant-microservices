@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace UI.Pages.Account;
+namespace Restaurant.Services.Identity.Pages.Account;
 
 public class AccessDeniedModel : PageModel
 {
