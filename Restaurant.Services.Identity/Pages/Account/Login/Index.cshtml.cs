@@ -107,6 +107,7 @@ public class Index : PageModel
                 var user = await _userManager.FindByNameAsync(Input.Username);
                 await _events.RaiseAsync(
                     new UserLoginSuccessEvent(user.UserName, user.Id, user.UserName, clientId: context?.Client.ClientId));
+                
 
                 if (context != null)
                 {
@@ -133,6 +134,7 @@ public class Index : PageModel
 
         // something went wrong, show form with error
         await BuildModelAsync(Input.ReturnUrl);
+
         return Page();
     }
 

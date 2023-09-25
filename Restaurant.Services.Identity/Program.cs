@@ -1,3 +1,4 @@
+using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Test;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +6,7 @@ using Restaurant.Services.Identity;
 using Restaurant.Services.Identity.Data;
 using Restaurant.Services.Identity.Initializer;
 using Restaurant.Services.Identity.Models;
+using Restaurant.Services.Identity.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +15,6 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IDbInitializer, DbInitializer>();
-
 
 builder.Services.AddIdentity<ApplicationUser,IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
@@ -34,7 +34,8 @@ builder.Services.AddIdentityServer(options =>
 .AddAspNetIdentity<ApplicationUser>()
 .AddDeveloperSigningCredential();
 
-
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
 
 var app = builder.Build();
 
@@ -46,28 +47,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-//var dbInitializer = app.Services.BuildServiceProvide().GetService<IDbInitializer>();
-
-
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+SeedDatabase();
 app.UseRouting();
 app.UseIdentityServer();
 app.UseAuthorization();
-//dbInitializer.Initialize();
-
-using (var serviceScope = app.Services.CreateScope())
-{
-    var services = serviceScope.ServiceProvider;
-
-    var dbInitializer = services.GetRequiredService<IDbInitializer>();
-
-    //Use the service
-    dbInitializer.Initialize();
-     
-}
 
 app.MapRazorPages().RequireAuthorization();
 app.MapControllerRoute(
@@ -75,3 +60,12 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+        dbInitializer.Initialize();
+    }
+}

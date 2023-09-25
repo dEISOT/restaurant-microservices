@@ -67,7 +67,7 @@ public class Index : PageModel
             // this captures necessary info from the current logged in user
             // this can still return null if there is no context needed
             LogoutId ??= await _interaction.CreateLogoutContextAsync();
-
+            var token = await HttpContext.GetTokenAsync("access_token");
             // delete local authentication cookie
             await _signInManager.SignOutAsync();
 

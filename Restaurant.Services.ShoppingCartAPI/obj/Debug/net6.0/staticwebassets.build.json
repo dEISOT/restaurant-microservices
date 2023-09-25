@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "8c9HZjRNBgLB1fJebqurMeS2hl89+uqU3NORr2F0omg=",
+  "Source": "Restaurant.Services.ShoppingCartAPI",
+  "BasePath": "_content/Restaurant.Services.ShoppingCartAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
