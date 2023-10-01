@@ -44,7 +44,7 @@ namespace Restaurant.Services.ShoppingCartAPI.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartDetails");
+                    b.ToTable("CartDetails", (string)null);
                 });
 
             modelBuilder.Entity("Restaurant.Services.ShoppingCartAPI.Models.CartHeader", b =>
@@ -65,7 +65,7 @@ namespace Restaurant.Services.ShoppingCartAPI.Migrations
 
                     b.HasKey("CartHeaderId");
 
-                    b.ToTable("CartHeaders");
+                    b.ToTable("CartHeaders", (string)null);
                 });
 
             modelBuilder.Entity("Restaurant.Services.ShoppingCartAPI.Models.Product", b =>
@@ -94,7 +94,7 @@ namespace Restaurant.Services.ShoppingCartAPI.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Restaurant.Services.ShoppingCartAPI.Models.CartDetails", b =>

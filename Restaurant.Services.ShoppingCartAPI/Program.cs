@@ -4,6 +4,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Restaurant.Services.ShoppingCartAPI;
 using Restaurant.Services.ShoppingCartAPI.DbContexts;
+using Restaurant.Services.ShoppingCartAPI.Repositories;
+using System.Xml.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,9 +48,12 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<ICartRepository, CartRepository>();
 
-IMapper mapper = MappingConfig.RegisterMap().CreateMapper();
-builder.Services.AddSingleton(mapper);
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services
+    .AddSingleton(mapper)
+    .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Authen
 builder.Services.AddAuthentication("Bearer")
@@ -70,7 +75,6 @@ builder.Services.AddAuthorization(options =>
     });
 });
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

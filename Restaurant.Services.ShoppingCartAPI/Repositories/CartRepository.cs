@@ -80,14 +80,12 @@ namespace Restaurant.Services.ShoppingCartAPI.Repositories
         {
             Cart cart = new()
             {
-                CartHeader = await _db.CartHeaders.FirstOrDefaultAsync(x => x.UserId == userId),
-
+                CartHeader = await _db.CartHeaders.FirstOrDefaultAsync(x => x.UserId == userId)
             };
-            cart.CartDetails = _db.CartDetails.
-                Where(u => u.CartHeaderId == cart.CartHeader.CartHeaderId).Include(u=> u.Product);
+
+            cart.CartDetails = _db.CartDetails.Where(u => u.CartHeaderId == cart.CartHeader!.CartHeaderId).Include(u => u.Product);
 
             return _mapper.Map<CartDto>(cart);
-
         }
 
         public async Task<bool> RemoveFromCart(int cartDetailsId)

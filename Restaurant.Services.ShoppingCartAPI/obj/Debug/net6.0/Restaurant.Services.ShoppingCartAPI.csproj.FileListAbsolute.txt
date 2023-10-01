@@ -71,3 +71,4 @@ D:\Programming\restaurant-microservices\Restaurant.Services.ShoppingCartAPI\obj\
 D:\Programming\restaurant-microservices\Restaurant.Services.ShoppingCartAPI\obj\Debug\net6.0\Restaurant.Services.ShoppingCartAPI.pdb
 D:\Programming\restaurant-microservices\Restaurant.Services.ShoppingCartAPI\obj\Debug\net6.0\Restaurant.Services.ShoppingCartAPI.genruntimeconfig.cache
 D:\Programming\restaurant-microservices\Restaurant.Services.ShoppingCartAPI\obj\Debug\net6.0\ref\Restaurant.Services.ShoppingCartAPI.dll
+D:\Programming\restaurant-microservices\Restaurant.Services.ShoppingCartAPI\bin\Debug\net6.0\libman.json

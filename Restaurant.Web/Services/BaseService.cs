@@ -9,14 +9,13 @@ namespace Restaurant.Web.Services
 {
     public class BaseService : IBaseService
     {
-        public ResponseDto responseModel { get; set; }
-        public IHttpClientFactory httpClient { get; set; }
+        public ResponseDto ResponseDto { get; set; }
+        private readonly IHttpClientFactory _httpClient;
 
 
         public BaseService (IHttpClientFactory httpClient)
         {
-            this.responseModel = new ResponseDto();
-            this.httpClient = httpClient;
+            _httpClient = httpClient;
         }
 
 
@@ -24,25 +23,23 @@ namespace Restaurant.Web.Services
         {   
             try
             {
-                var client = httpClient.CreateClient("RestaurantAPI");
+                var client = _httpClient.CreateClient("RestaurantAPI");
                 HttpRequestMessage message = new HttpRequestMessage();
                 message.Headers.Add("Accept", "application/json");
                 message.RequestUri = new Uri(apiRequest.Url);
                 client.DefaultRequestHeaders.Clear();
-                if(apiRequest.Data != null)
+                if (apiRequest.Data != null)
                 {
-                    message.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data),
-                        Encoding.UTF8, "application/json");
+                    message.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data), Encoding.UTF8, "application/json");
                 }
 
                 if (!string.IsNullOrEmpty(apiRequest.AccessToken))
-                {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.AccessToken);
-                }
 
                 HttpResponseMessage apiResponse = null;
                 switch (apiRequest.ApiType)
-                { 
+                {
+
                     case SD.ApiType.POST:
                         message.Method = HttpMethod.Post;
                         break;
@@ -56,8 +53,8 @@ namespace Restaurant.Web.Services
                         message.Method = HttpMethod.Get;
                         break;
                 }
-                apiResponse = await client.SendAsync(message);
 
+                apiResponse = await client.SendAsync(message);
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
                 var apiResponseDto = JsonConvert.DeserializeObject<T>(apiContent);
                 return apiResponseDto;
